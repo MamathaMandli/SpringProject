@@ -17,29 +17,43 @@ public class StudentController {
     private StudentService studentService;
 
     @GetMapping("/getAll")
-    public List<Student> getAllStudents() {
+    public List<String> getAllStudents() {
         System.out.println("request is coming");
         return studentService.findAll();
     }
 
     @PostMapping("/add")
     public Student addStudent(@RequestBody Student student) {
-     return  studentService.save(student);
+
+        return studentService.save(student);
     }
+
     @GetMapping("/findId/{id}")
-    public ResponseEntity<Optional<Optional<Student>>> getStudentById(@PathVariable Long id) {
+    public ResponseEntity<Optional<Student>> getStudentById(@PathVariable Long id) {
         Optional<Student> student = studentService.getStudentById(id);
         if (student != null) {
-            return ResponseEntity.ok(Optional.of(student));
+            return ResponseEntity.ok(student);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
-    @GetMapping("/first-names")
-    public List<String> getAllFirstNames() {
-        return studentService.getAllFirstNames();
+
+    @GetMapping("/findFirstName/{f}")
+    public ResponseEntity<List<Student>> getStudentByFirstName(@PathVariable(value = "f") String firstName) {
+        List<Student> studentFirstName = studentService.getStudentsByFirstName(firstName);
+        if (studentFirstName != null) {
+            return ResponseEntity.ok(studentFirstName);
+        }
+        return null;
     }
 
+    @GetMapping("/findLastName/{lastName}")
+    public ResponseEntity<List<Student>> getStudentByLastName(@PathVariable String lastName) {
+        List<Student> studentLastName = studentService.getStudentsByLastName(lastName);
+        if (studentLastName != null) {
+            return ResponseEntity.ok(studentLastName);
+        }
+        return null;
 
+    }
 }
-
