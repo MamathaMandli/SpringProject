@@ -6,9 +6,7 @@ import com.example.mamatha.student.Service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -18,6 +16,7 @@ public class EmployeeServiceImpl implements EmployeeService
     private EmployeeRepository employeeRepository;
     @Override
     public void save(Employee employee) {
+
         employeeRepository.save(employee);
     }
 
@@ -32,6 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService
 
     @Override
     public List<Employee> findAll() {
+
         return employeeRepository.findAll();
     }
 
@@ -72,9 +72,18 @@ public class EmployeeServiceImpl implements EmployeeService
 
     @Override
     public boolean checkById(Long abcd) {
+
         return employeeRepository.existsById(abcd);
     }
 
+    public Employee getEmployeeById(Long id) {
+        return employeeRepository.findEmployeeById(id);
+    }
+
+//    @Override
+//    public Optional<Employee> fetchId(Long id) {
+//        return employeeRepository.findById(id);
+//    }
 
 }
 

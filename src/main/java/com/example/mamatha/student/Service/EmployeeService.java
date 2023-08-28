@@ -27,4 +27,9 @@ public interface EmployeeService {
     Employee updateEmployeeSalary(Long id, double salary);
 
     boolean checkById(Long abcd);
+
+
+    Employee getEmployeeById(Long id);
+
+//    Optional<Employee> fetchId(Long id);
 }

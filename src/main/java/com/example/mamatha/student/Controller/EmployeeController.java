@@ -45,6 +45,12 @@ public class EmployeeController
 
         employeeService.deleteEmployeeById(id);
     }
+    @GetMapping()
+    public Employee getEmployeeById( Long id ) {
+        return employeeService.getEmployeeById(id);
+    }
+
+
     @GetMapping("/getOnlyNames")
     public List<String> getOnlyNames()
     {
@@ -67,12 +73,23 @@ public class EmployeeController
     @PutMapping("/{id}")
     public ResponseEntity<String> updateEmployee(@PathVariable Long id, @RequestBody Employee updatedEmployee) {
         Optional<Employee> updated = employeeService.updateEmployee(id, updatedEmployee);
-        if (updated != null) {
+        if (updated!= null) {
             return ResponseEntity.ok("data updated");
         } else {
             return ResponseEntity.notFound().build();
         }
     }
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Optional<Employee>> fetchId(@PathVariable Long id){
+//        Optional<Employee> fetchId=employeeService.fetchId(id);
+//        if(fetchId!=null){
+//            return ResponseEntity.ok(fetchId);
+//        }
+//        return ResponseEntity.notFound().build();
+//    }
+
+
+
     @PatchMapping("/{id}/update-salary")
     public ResponseEntity<Object> updateEmployeeSalary(
             @PathVariable(name = "id") Long abcd,
@@ -84,6 +101,4 @@ public class EmployeeController
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(abcd+" " +"id is not present in the database");
         }
     }
-
-
 }

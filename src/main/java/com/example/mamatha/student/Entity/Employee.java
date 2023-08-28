@@ -1,8 +1,10 @@
 package com.example.mamatha.student.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Entity
 @Data
@@ -15,7 +17,6 @@ public class Employee
     @Getter
     private  String employeeName;
     private double salary;
-
 
     public String getEmployeeName(Employee getEmployeeName)
     {
